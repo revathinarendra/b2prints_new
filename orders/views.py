@@ -3,12 +3,6 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from .models import Order
 from .forms import OrderForm
-# views.py
-
-from django.views.generic.edit import FormView
-from django.shortcuts import redirect
-from .models import Order
-from .forms import OrderForm
 from .utils.file_upload import upload_file  # Import your file upload function
 
 class OrderCreateView(FormView):
