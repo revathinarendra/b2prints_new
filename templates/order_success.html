@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        li:before {
+            content: "\2022"; /* Bullet point */
+            color: #4CAF50; /* Green bullet color */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thank you for your order!</h1>
+        <p>Your order details:</p>
+        <ul>
+            <li>Order ID: {{ order.order_id }}</li>
+            <li>Printer Name: {{ order.printer_name }}</li>
+            <li>Location: {{ order.location }}</li>
+            <li>Contact Number: {{ order.contact_number }}</li>
+            <li>Product: {{ order.product }}</li>
+            <li>Quantity: {{ order.quantity }}</li>
+            <!-- Add more order details here if needed -->
+        </ul>
+    </div>
+</body>
+</html>
