@@ -26,6 +26,8 @@ class Order(models.Model):
     quantity = models.IntegerField(default=0)
     front_side_image = models.ImageField(upload_to='order_images')
     back_side_image = models.ImageField(upload_to='order_images',blank=True, null=True)
+    front_side_image_url = models.URLField(blank=True, null=True)
+    back_side_image_url = models.URLField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.order_id:
