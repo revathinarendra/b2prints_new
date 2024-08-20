@@ -1,8 +1,9 @@
+from django.core import signing
 from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
-from django.shortcuts import redirect
 from .models import Order
 from .forms import OrderForm
+from django.shortcuts import  redirect,render, get_object_or_404
+
 
 
 class OrderCreateView(FormView):
@@ -15,19 +16,29 @@ class OrderCreateView(FormView):
         print(f'Order before saving: {order}')
         order.save()
         print(f'Order saved with ID: {order.order_id}')
-        return redirect('order_success', order_id=order.order_id)
+
+        # Encrypt the order_id
+        encrypted_order_id = signing.dumps(order.order_id)
+
+        return redirect('order_success', order_id=encrypted_order_id)
 
     def form_invalid(self, form):
         print('Form is invalid')
         print(f'Errors: {form.errors}')
         return super().form_invalid(form)
 
-from django.shortcuts import render, get_object_or_404
-from .models import Order
 
 def order_success(request, order_id):
     print('Entered order_success view')
-    order = get_object_or_404(Order, order_id=order_id)
+
+    # Decrypt the order_id
+    try:
+        decrypted_order_id = signing.loads(order_id)
+    except signing.BadSignature:
+        # Handle the case where the signature is tampered with or invalid
+        return render(request, 'error.html', {'message': 'Invalid order ID'})
+
+    order = get_object_or_404(Order, order_id=decrypted_order_id)
     print(f'Order retrieved: {order}')
 
     context = {
