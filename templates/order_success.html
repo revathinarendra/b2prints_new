@@ -37,6 +37,17 @@
             width: 1em;
             margin-left: -1em;
         }
+        .image-preview {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image-preview img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -50,8 +61,19 @@
             <li>Contact Number: {{ order.contact_number }}</li>
             <li>Product: {{ order.product }}</li>
             <li>Quantity: {{ order.quantity }}</li>
-            <!-- Add more order details here if needed -->
         </ul>
+
+        <div class="image-preview">
+            {% if order.front_side_image %}
+                <p>Front Side Image:</p>
+                <img src="{{ order.front_side_image.url }}" alt="Front Side Image">
+            {% endif %}
+
+            {% if order.back_side_image %}
+                <p>Back Side Image:</p>
+                <img src="{{ order.back_side_image.url }}" alt="Back Side Image">
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>
