@@ -1,4 +1,3 @@
-import os
 from django.db import models
 from products.models import Product
 from django.core.validators import RegexValidator
@@ -18,14 +17,15 @@ class Order(models.Model):
         validators=[
             RegexValidator(
                 regex='^[1-9][0-9]{9}$',
-                message='Contact number must be a 10 digit number without leading zeros',
+                message='Contact number must be a 10-digit number without leading zeros',
             ),
         ]
     )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
     front_side_image = models.ImageField(upload_to='order_images')
-    back_side_image = models.ImageField(upload_to='order_images',blank=True, null=True)
+    back_side_image = models.ImageField(upload_to='order_images', blank=True, null=True)
+    email = models.EmailField(null=True, blank=True, help_text="If you provide an email address, a link to the order details will be sent to your email.")
 
     def save(self, *args, **kwargs):
         if not self.order_id:

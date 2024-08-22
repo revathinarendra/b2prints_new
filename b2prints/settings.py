@@ -178,3 +178,9 @@ DEFAULT_FILE_STORAGE = 'b2prints.media_storages.MediaStorage'
 # # Set the default file storage backend to S3
 
 # DEFAULT_FILE_STORAGE = 'b2prints.media_storages.MediaStorage'
+EMAIL_BACKEND = "backends.custom_email_backend.CustomEmailBackend"
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "your_default_email@gmail.com")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "your_default_password")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "True") == "True"
